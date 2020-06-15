@@ -9,38 +9,41 @@
           Search results for:
           <b>{{ this.searchName }}</b>
         </div>
-        <ArtistSearchList
-          @onSelectArtist="selectArtist"
-          :artistList="artists"
-        />
+        <ArtistSearchList @onSelectArtist="selectArtist" :artistList="artists" />
       </div>
     </div>
+    <div class="loader" v-if="loadingStats">
+      <Loader />
+    </div>
     <div v-if="artist">
-      <AverageWords :artist="artist" />
+      <ArtistStats :artist="artist" />
     </div>
   </div>
 </template>
 
 <script>
-import ArtistForm from './components/ArtistForm.vue';
-import ArtistSearchList from './components/ArtistSearchList.vue';
-import AverageWords from './components/AverageWords.vue';
+import ArtistForm from "./components/ArtistForm.vue";
+import ArtistSearchList from "./components/ArtistSearchList.vue";
+import ArtistStats from "./components/ArtistStats.vue";
+import Loader from "./components/Loader.vue";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       artists: null,
       searchName: null,
       artist: null,
+      loadingStats: false
     };
   },
   components: {
     ArtistForm,
     ArtistSearchList,
-    AverageWords,
+    ArtistStats,
+    Loader
   },
   methods: {
     async getArtists(name) {
@@ -51,15 +54,17 @@ export default {
       this.artists = response.data;
     },
     async selectArtist(artist) {
+      this.loadingStats = true;
       this.artists = null;
       this.searchName = null;
-      await this.getAverageWords(artist);
+      this.artist = await this.getStatistics(artist);
+      this.loadingStats = false;
     },
-    async getAverageWords(artist) {
-      const response = await axios.post('/api/artists/work', artist);
-      this.artist = response.data;
-    },
-  },
+    async getStatistics(artist) {
+      const response = await axios.post("/api/artists/work", artist);
+      return response.data;
+    }
+  }
 };
 </script>
 
@@ -79,5 +84,10 @@ export default {
 
 .artist-list {
   position: absolute;
+}
+
+.loader {
+  margin-top: 25px;
+  margin-left: 25%;
 }
 </style>

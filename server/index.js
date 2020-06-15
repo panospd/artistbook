@@ -3,7 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const artist = require('./services/artist');
-const lyrics = require("./services/lyrics")
+const lyrics = require("./services/lyrics");
+const stats = require("./services/stats");
 
 const app = express();
 
@@ -15,13 +16,13 @@ app.post('/artists/work', async (req, res) => {
     id: mbid,
     name
   } = req.body;
-  const songs = await artist.getSongsByArtistId(mbid);
+  const albums = await artist.getAlbumsForArtist(mbid);
 
-  const avgWords = await lyrics.calculateAvgWords(songs, name)
+  const albumsWithLyrics = await lyrics.getAlbumsWithLyrics(albums, name);
 
   res.status(200).send({
     name,
-    avgWords
+    stats: stats.calculate(albumsWithLyrics)
   });
 });
 

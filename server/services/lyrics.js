@@ -1,16 +1,33 @@
 const axios = require("axios")
 
-const calculateAvgWords = async (songs, artist) => {
-    const lyricsRequests = songs.list.map(async (song) => {
-        return await getWordsForSong(song.title, artist);
+const getAlbumsWithLyrics = async (albums, artist) => {
+    const lyricsRequests = albums.map(async (album) => {
+
+        return {
+            id: album.id,
+            title: album.title,
+            date: album.date,
+            tracks: await Promise.all(await getTracks(album, artist))
+        }
     });
 
-    return Promise.all(lyricsRequests).then(songs => {
-        const filtered = songs.filter(s => !!s);
-        const sum = filtered.reduce((previous, current) => current += previous);
-        const avg = sum / filtered.length;
+    return Promise.all(lyricsRequests).then(albums => {
+        return albums;
+    })
+}
 
-        return Math.ceil(avg);
+async function getTracks(album, artist) {
+    return album.tracks.map(async ({
+        id,
+        title
+    }) => {
+        const words = await getWordsForSong(title, artist);
+
+        return {
+            id,
+            title,
+            words
+        }
     })
 }
 
@@ -26,5 +43,5 @@ async function getWordsForSong(title, artist) {
 }
 
 module.exports = {
-    calculateAvgWords
+    getAlbumsWithLyrics
 }
