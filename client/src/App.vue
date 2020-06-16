@@ -108,8 +108,8 @@ export default {
 }
 
 .loader {
-  margin-top: 25px;
-  margin-left: 10%;
+  margin-top: 75px;
+  margin-left: 15%;
 }
 
 .column {

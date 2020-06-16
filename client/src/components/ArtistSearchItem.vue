@@ -33,6 +33,15 @@ export default {
   transition: 0.3s;
   padding: 10px 0;
   min-height: 30px;
+  max-width: 80%;
+  min-width: 75%;
+}
+
+@media only screen and (max-width: 700px) {
+  .card {
+    max-width: 60%;
+    min-width: 55%;
+  }
 }
 
 /* On mouse-over, add a deeper shadow */
