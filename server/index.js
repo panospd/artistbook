@@ -21,6 +21,7 @@ app.post('/artists/work', async (req, res) => {
   const albumsWithLyrics = await lyrics.getAlbumsWithLyrics(albums, name);
 
   res.status(200).send({
+    mbid,
     name,
     stats: stats.calculate(albumsWithLyrics)
   });

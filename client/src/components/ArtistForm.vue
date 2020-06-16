@@ -2,7 +2,6 @@
   <div class="pure-u-1-4">
     <form @submit.prevent="searchArtists">
       <input type="text" placeholder="Search artists" v-model="name" />
-      <input type="submit" value="Submit" />
     </form>
   </div>
 </template>

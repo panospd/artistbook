@@ -33,7 +33,6 @@ export default {
   transition: 0.3s;
   padding: 10px 0;
   min-height: 30px;
-  min-width: 460px;
 }
 
 /* On mouse-over, add a deeper shadow */
