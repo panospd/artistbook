@@ -4,7 +4,7 @@ This is a simple application for searching basic statistics related to artists a
 
 To run the application:
 
-1.  Clone the repo or download as zip
+1.  Clone the repo or download as zip using the link: https://github.com/panospd/artistbook.git
 2.  Navigate to the top directory where docker-compose.yml is
 3.  Make sure you have docker and docker-compose installed
 4.  Run docker-compose up and wait for docker to finish spinning up the containers
