@@ -20,11 +20,23 @@ app.post('/artists/work', async (req, res) => {
 
   const albumsWithLyrics = await lyrics.getAlbumsWithLyrics(albums, name);
 
-  res.status(200).send({
-    mbid,
-    name,
-    stats: stats.calculate(albumsWithLyrics)
-  });
+  const stat = stats.calculate(albumsWithLyrics);
+
+  if (!stat.error) {
+    res.status(200).send({
+      mbid,
+      name,
+      stats: stat
+    });
+  } else {
+    res.status(200).send({
+      mbid,
+      name,
+      error: stat.error
+    });
+  }
+
+
 });
 
 app.get('/artists', async (req, res) => {

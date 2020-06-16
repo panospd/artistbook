@@ -3,6 +3,7 @@
     <div v-for="(artist, index) in artiststats" :key="artist.id">
       <div class="stats-container">
         <h3 style="text-align: left">Here are a few interesting stats for {{artist.name}}</h3>
+
         <div class="stat-item">
           <label>Average number of words per song:</label>&nbsp;
           <b>{{artist.stats.avg}}</b>

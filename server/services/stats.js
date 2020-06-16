@@ -2,6 +2,12 @@ const calculate = (albums) => {
 
     const words = extractAllTrackWords(albums)
 
+    if (words.length === 0) {
+        return {
+            error: "Problem finding tracks for this artist"
+        }
+    }
+
     return {
         avg: averageOfTracks(words),
         min: getMin(words),

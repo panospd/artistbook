@@ -75,7 +75,15 @@ export default {
       this.loadingStats = true;
       this.artists = null;
       this.searchName = null;
-      this.artiststats.push(await this.getStatistics(artist));
+
+      const nextArtist = await this.getStatistics(artist);
+
+      if (nextArtist.error) {
+        alert(artist.error);
+      } else {
+        this.artiststats.push(nextArtist);
+      }
+
       this.loadingStats = false;
     },
     async getStatistics(artist) {

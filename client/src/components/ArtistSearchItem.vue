@@ -33,14 +33,14 @@ export default {
   transition: 0.3s;
   padding: 10px 0;
   min-height: 30px;
-  max-width: 80%;
-  min-width: 75%;
+  max-width: 70%;
+  min-width: 70%;
 }
 
 @media only screen and (max-width: 700px) {
   .card {
-    max-width: 60%;
-    min-width: 55%;
+    max-width: 50%;
+    min-width: 50%;
   }
 }
 
