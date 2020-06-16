@@ -3,16 +3,16 @@ Welcome to artisbook!
 This is a simple application for searching basic statistics related to artists and their songs.
 
 To run the application:
- 1) Clone the repo or download as zip
- 2) Navigate to the top directory where docker-compose.yml is
- 3) Make sure you have docker and docker-compose installed
- 4) Run docker-compose up and wait for docker to finish spinning up the containers
- 5) Open your favorite browser
- 6) Navigate to http://localhost:9000
- 
- Alternatively if you don't have docker installed you can switch steps 3, 4 and 6 with the following
- 
- 3) Navigate to server directory and run: npm run dev
- 4) Navigate to client directory and run: npm run serve
- 6) Navigate to http://localhost:8080
- 
+
+1.  Clone the repo or download as zip
+2.  Navigate to the top directory where docker-compose.yml is
+3.  Make sure you have docker and docker-compose installed
+4.  Run docker-compose up and wait for docker to finish spinning up the containers
+5.  Open your favorite browser
+6.  Navigate to http://localhost:9000
+
+Alternatively if you don't have docker installed you can switch steps 3, 4 and 6 with the following
+
+3.  Navigate to server directory and run:npm i && npm run dev
+4.  Navigate to client directory and run:npm i && npm run serve
+5.  Navigate to http://localhost:8080
