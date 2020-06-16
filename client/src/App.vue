@@ -16,6 +16,9 @@
         </div>
       </div>
       <div class="column">
+        <div class="clearBtn">
+          <button @click="clearArtistStats" class="big">Clear results</button>
+        </div>
         <div v-if="artiststats">
           <ArtistStats :artiststats="artiststats" />
         </div>
@@ -78,6 +81,9 @@ export default {
     async getStatistics(artist) {
       const response = await axios.post("/api/artists/work", artist);
       return response.data;
+    },
+    clearArtistStats() {
+      this.artiststats = [];
     }
   }
 };
@@ -116,5 +122,15 @@ export default {
   content: "";
   display: table;
   clear: both;
+}
+
+.clearBtn {
+  text-align: right;
+  margin-right: 50px;
+  margin-bottom: 25px;
+}
+
+.big {
+  padding: 10px 10px;
 }
 </style>
