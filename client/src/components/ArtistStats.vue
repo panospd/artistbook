@@ -2,10 +2,10 @@
   <div>
     <div v-for="(artist, index) in artiststats" :key="artist.id">
       <div class="stats-container">
-        <h3 style="text-align: left">Here are a few interesting stats for {{artist.name}}</h3>
+        <h3 style="text-align: left">Statistics for {{artist.name}} across all songs:</h3>
 
         <div class="stat-item">
-          <label>Average number of words per song:</label>&nbsp;
+          <label>Average number of words</label>&nbsp;
           <b>{{artist.stats.avg}}</b>
           <span v-if="index > 0">
             <propostional-difference
@@ -14,7 +14,7 @@
           </span>
         </div>
         <div class="stat-item">
-          <label>Max number of words across all songs:</label>&nbsp;
+          <label>Max number words:</label>&nbsp;
           <b>{{artist.stats.max}}</b>
           <span v-if="index > 0">
             <propostional-difference
@@ -23,7 +23,7 @@
           </span>
         </div>
         <div class="stat-item">
-          <label>Min number of words across all songs:</label>&nbsp;
+          <label>Min number of words:</label>&nbsp;
           <b>{{artist.stats.min}}</b>
           <span v-if="index > 0">
             <propostional-difference
@@ -32,7 +32,7 @@
           </span>
         </div>
         <div class="stat-item">
-          <label>Standard deviation across all songs:</label>&nbsp;
+          <label>Standard deviation:</label>&nbsp;
           <b>{{artist.stats.stDeviation}}</b>
           <span v-if="index > 0">
             <propostional-difference
@@ -41,7 +41,7 @@
           </span>
         </div>
         <div class="stat-item">
-          <label>Variance across all songs:</label>&nbsp;
+          <label>Variance:</label>&nbsp;
           <b>{{artist.stats.variance}}</b>
           <span v-if="index > 0">
             <propostional-difference

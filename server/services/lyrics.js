@@ -37,17 +37,11 @@ async function getWordsForSong(title, artist) {
             `https://api.lyrics.ovh/v1/${artist}/${title}`
         );
 
-        const lyrics = response.data.lyrics
+        return response.data.lyrics
             .split(" ")
             .filter(l => {
                 return !l.includes(":") && l !== "(*)" && l !== "";
-            });
-
-        if (lyrics.length === 1) {
-            console.log(lyrics)
-        }
-
-        return lyrics.length;
+            }).length;
     } catch (error) {}
 }
 
