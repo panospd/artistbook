@@ -35,8 +35,6 @@ app.post('/artists/work', async (req, res) => {
       error: stat.error
     });
   }
-
-
 });
 
 app.get('/artists', async (req, res) => {
