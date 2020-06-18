@@ -1,7 +1,8 @@
 <template>
   <div class="pure-u-1-4">
     <form @submit.prevent="searchArtists">
-      <input type="text" placeholder="Search artists" v-model="name" />
+      <input type="text" placeholder="Search artists by name" v-model="name" />
+      <span class="validation-container" v-if="validationError">{{validationError}}</span>
     </form>
   </div>
 </template>
@@ -12,14 +13,22 @@ export default {
   data() {
     return {
       name: null,
+      validationError: null,
       artists: {}
     };
   },
   methods: {
     searchArtists() {
       const searchInput = this.name;
+      if (!this.name) {
+        this.validationError = "Artist name cannot be empty";
+        this.$emit("clearSearchResults");
+        return;
+      }
+
       this.$emit("getArtists", searchInput);
       this.name = null;
+      this.validationError = null;
     }
   }
 };
@@ -42,6 +51,13 @@ input[type="submit"] {
 
 form {
   text-align: left;
+}
+
+.validation-container {
+  display: block;
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
 }
 
 @media only screen and (max-width: 624px) {

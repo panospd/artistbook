@@ -5,7 +5,11 @@
     <div class="row">
       <div class="column">
         <div style="margin-left:22%">
-          <ArtistForm class="artist-form" @getArtists="getArtists" />
+          <ArtistForm
+            class="artist-form"
+            @clearSearchResults="onClearSearchResults"
+            @getArtists="getArtists"
+          />
           <div v-if="artists" class="artist-list" style="margin-top: 1%">
             <div style="text-align: left; margin-bottom: 12px;">
               Search results for:
@@ -92,6 +96,10 @@ export default {
     },
     clearArtistStats() {
       this.artiststats = [];
+    },
+    onClearSearchResults() {
+      this.searchName = null;
+      this.artists = null;
     }
   }
 };
