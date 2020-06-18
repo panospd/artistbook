@@ -10,6 +10,9 @@
             @clearSearchResults="onClearSearchResults"
             @getArtists="getArtists"
           />
+          <div class="loader" v-if="loadingArtists">
+            <Loader />
+          </div>
           <div v-if="artists" class="artist-list" style="margin-top: 1%">
             <div style="text-align: left; margin-bottom: 12px;">
               Search results for:
@@ -49,7 +52,8 @@ export default {
       artists: null,
       searchName: null,
       artiststats: [],
-      loadingStats: false
+      loadingStats: false,
+      loadingArtists: false
     };
   },
   components: {
@@ -60,10 +64,13 @@ export default {
   },
   methods: {
     async getArtists(name) {
+      this.artists = null;
       this.searchName = name;
+      this.loadingArtists = true;
 
       const response = await axios.get(`/api/artists?name=${name}`);
       this.artists = response.data;
+      this.loadingArtists = false;
     },
     async selectArtist(artist) {
       console.log(this.artiststats);
