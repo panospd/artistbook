@@ -14,7 +14,7 @@
           </span>
         </div>
         <div class="stat-item">
-          <label>Max number words:</label>&nbsp;
+          <label>Max number of words:</label>&nbsp;
           <b>{{artist.stats.max}}</b>
           <span v-if="index > 0">
             <propostional-difference

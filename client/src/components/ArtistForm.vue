@@ -20,8 +20,11 @@ export default {
   methods: {
     searchArtists() {
       const searchInput = this.name;
-      if (!this.name) {
-        this.validationError = "Artist name cannot be empty";
+
+      const validationResult = this.validate(searchInput);
+
+      if (!validationResult.valid) {
+        this.validationError = validationResult.message;
         this.$emit("clearSearchResults");
         return;
       }
@@ -29,6 +32,19 @@ export default {
       this.$emit("getArtists", searchInput);
       this.name = null;
       this.validationError = null;
+    },
+    validate(input) {
+      if (!input) return { valid: false, message: "Please provide a name" };
+
+      if (input.length < 3)
+        return {
+          valid: false,
+          message: "Artist name should be at least 3 characters long"
+        };
+
+      return {
+        valid: true
+      };
     }
   }
 };
