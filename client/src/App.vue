@@ -13,7 +13,10 @@
           <div class="loader" v-if="loadingArtists">
             <Loader />
           </div>
-          <div v-if="artists" class="artist-list" style="margin-top: 1%">
+          <div v-if="artists && artists.error">
+            <Error :message="artists.error" />
+          </div>
+          <div v-if="artists && !artists.error" class="artist-list" style="margin-top: 1%">
             <div style="text-align: left; margin-bottom: 12px;">
               Search results for:
               <b>{{ this.searchName }}</b>
@@ -42,6 +45,7 @@ import ArtistForm from "./components/ArtistForm.vue";
 import ArtistSearchList from "./components/ArtistSearchList.vue";
 import ArtistStats from "./components/ArtistStats.vue";
 import Loader from "./components/Loader.vue";
+import Error from "./components/Error.vue";
 
 import axios from "axios";
 
@@ -60,17 +64,23 @@ export default {
     ArtistForm,
     ArtistSearchList,
     ArtistStats,
-    Loader
+    Loader,
+    Error
   },
   methods: {
     async getArtists(name) {
-      this.artists = null;
-      this.searchName = name;
-      this.loadingArtists = true;
+      try {
+        this.artists = null;
+        this.searchName = name;
+        this.loadingArtists = true;
 
-      const response = await axios.get(`/api/artists?name=${name}`);
-      this.artists = response.data;
-      this.loadingArtists = false;
+        const response = await axios.get(`/api/artists?name=${name}`);
+        this.artists = response.data;
+        this.loadingArtists = false;
+      } catch (error) {
+        this.artists = { error: error.response.data };
+        this.loadingArtists = false;
+      }
     },
     async selectArtist(artist) {
       console.log(this.artiststats);

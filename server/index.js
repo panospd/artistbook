@@ -1,17 +1,18 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const artist = require('./services/artist');
+const artist = require("./services/artist");
 const lyrics = require("./services/lyrics");
 const stats = require("./services/stats");
 
 const app = express();
 
 app.use(cors());
+
 app.use(bodyParser());
 
-app.post('/artists/work', async (req, res) => {
+app.post("/artists/work", async (req, res) => {
   const {
     id: mbid,
     name
@@ -26,29 +27,33 @@ app.post('/artists/work', async (req, res) => {
     res.status(200).send({
       mbid,
       name,
-      stats: stat
+      stats: stat,
     });
   } else {
     res.status(200).send({
       mbid,
       name,
-      error: stat.error
+      error: stat.error,
     });
   }
 });
 
-app.get('/artists', async (req, res) => {
-  const name = req.query.name;
+app.get("/artists", async (req, res) => {
+  try {
+    const name = req.query.name;
 
-  if (!name)
-    return res.status(400).json({
-      message: 'query parameter name is mandatory',
-    });
+    if (!name)
+      return res.status(400).json({
+        message: "query parameter name is mandatory",
+      });
 
-  const artists = await artist.getByName(name);
-  res.send(artists);
+    const artists = await artist.getByName(name);
+    res.send(artists);
+  } catch (error) {
+    res.status(500).send("Something wrong on our end. Please try again!");
+  }
 });
 
 app.listen(3000, () => {
-  console.log('App listening on port 3000!');
+  console.log("App listening on port 3000!");
 });
