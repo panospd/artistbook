@@ -26,11 +26,11 @@ function getVariance(words) {
         return sqrDiff;
     });
 
-    return Mean(squareDiffs).toFixed(2);
+    return parseFloat(Mean(squareDiffs).toFixed(2));
 }
 
 function getSstandardDeviation(words) {
-    return Math.sqrt(getVariance(words)).toFixed(2);
+    return parseFloat(Math.sqrt(getVariance(words)).toFixed(2));
 }
 
 function getMax(arr) {
