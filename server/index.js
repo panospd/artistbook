@@ -30,7 +30,7 @@ app.post("/artists/work", async (req, res) => {
       stats: stat,
     });
   } else {
-    res.status(200).send({
+    res.status(500).send({
       mbid,
       name,
       error: stat.error,
