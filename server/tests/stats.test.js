@@ -37,7 +37,7 @@ describe("Calculate stats", function () {
         expect(result).toEqual({
             avg: 10,
             min: 5,
-            max: 15,
+            max: 10,
             stDeviation: 4.08,
             variance: 16.67
         });
