@@ -5,6 +5,5 @@ COPY package.json .
 RUN npm i
 
 COPY . .
-RUN ls
 
 CMD ["npm", "run", "dev"]
