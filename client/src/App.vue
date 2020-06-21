@@ -100,7 +100,7 @@ export default {
       const nextArtist = await this.getStatistics(artist);
 
       if (nextArtist.error) {
-        alert(artist.error);
+        alert(nextArtist.error);
       } else {
         this.artiststats.push(nextArtist);
       }
@@ -108,8 +108,12 @@ export default {
       this.loadingStats = false;
     },
     async getStatistics(artist) {
-      const response = await axios.post("/api/artists/work", artist);
-      return response.data;
+      try {
+        const response = await axios.post("/api/artists/work", artist);
+        return response.data;
+      } catch (error) {
+        return error.response.data;
+      }
     },
     clearArtistStats() {
       this.artiststats = [];
